@@ -1,0 +1,75 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: Arial;
+  }
+  
+  body {
+    background-color: rgb(150, 148, 142);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /*to make the gird position in center of the page*/
+    margin: 0;
+    font-size: 6vmin;
+     /*using vmin because it gets adjusted 
+     in every screen according to its need*/
+  }
+  
+  #game-board {
+    display: grid;
+    /*we have used css variables casuse we were
+    having many values repeated
+    (varibales are defined in js)*/
+    grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+    grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+
+    /*repeat is besically represents a
+     repeated fragmenet of track list,
+    allowing a large number of columns
+     or rows that exhibit a recurring
+    pattren to be written in a more compact form*/
+
+    background-color: rgb(219, 135, 208);
+    gap: var(--cell-gap);
+    /*the gap between every box*/
+    border-radius: 1vmin;
+    padding: var(--cell-gap);
+    position: relative;
+    /*here postiton is set to relative ,to have 
+    that nice aimation we are seeing 
+    while sliding the boxes inside the grid*/
+  }
+  
+  .cell {
+    background-color: rgb(241, 184, 202);
+    border-radius: 1vmin;
+  }
+  
+  .tile {
+    position: absolute;
+    /*we made the psoition absolute
+     so it wont mess with our grid*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border-radius: 1vmin;
+    top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+    left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+    font-weight: bold;
+    background-color: hsl(280, 50%, var(--background-lightness));
+    /*hsl = hue, saturation, lightness*/
+    color: hsl(280, 25%, var(--text-lightness));
+    /*hsl = hue, saturation, lightness*/
+    animation: show 200ms ease-in-out;
+    transition: 100ms ease-in-out;
+  }
+  
+  @keyframes show {
+    0% {
+      opacity: .5;
+      transform: scale(0);
+    }
+  }
